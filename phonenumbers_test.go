@@ -194,6 +194,32 @@ func TestNormalize(t *testing.T) {
 	}
 }
 
+func TestNumberType(t *testing.T) {
+	var tcs = []struct {
+		input      string
+		region     string
+		numberType PhoneNumberType
+	}{
+		{
+			input:      "2065432100",
+			region:     "US",
+			numberType: FIXED_LINE_OR_MOBILE,
+		},
+	}
+
+	for i, tc := range tcs {
+		num, err := Parse(tc.input, tc.region)
+		if err != nil {
+			t.Errorf("[test %d:err] failed parsing: %s\n", i, tc.input)
+		}
+
+		typ := GetNumberType(num)
+		if typ != tc.numberType {
+			t.Errorf("[test %d: err] %s: unexpected number type: %d  Expected %d", i, tc.input, typ, tc.numberType)
+		}
+	}
+}
+
 func TestIsValidNumber(t *testing.T) {
 	var tests = []struct {
 		input   string
@@ -983,6 +1009,46 @@ func TestBurkinaFaso(t *testing.T) {
 			parseRegion:   "",
 			expectedE164:  "+22658125926",
 			validRegion:   "BF",
+			isValid:       true,
+			isValidRegion: true,
+		},
+	}
+
+	runTestBatch(t, tests)
+}
+
+// see https://groups.google.com/forum/#!topic/libphonenumber-discuss/pecTIo_HpVE
+func TestMexico(t *testing.T) {
+	tests := []testCase{
+		{
+			num:           "044 664 899 1010",
+			parseRegion:   "MX",
+			expectedE164:  "+526648991010",
+			validRegion:   "MX",
+			isValid:       true,
+			isValidRegion: true,
+		},
+		{
+			num:           "01 800 123 2222",
+			parseRegion:   "MX",
+			expectedE164:  "+528001232222",
+			validRegion:   "MX",
+			isValid:       true,
+			isValidRegion: true,
+		},
+		{
+			num:           "+52 664 899 1010",
+			parseRegion:   "",
+			expectedE164:  "+526648991010",
+			validRegion:   "MX",
+			isValid:       true,
+			isValidRegion: true,
+		},
+		{
+			num:           "+52 1 664 899 1010",
+			parseRegion:   "",
+			expectedE164:  "+526648991010",
+			validRegion:   "MX",
 			isValid:       true,
 			isValidRegion: true,
 		},

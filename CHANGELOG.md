@@ -1,3 +1,34 @@
+v1.0.49
+----------
+ * fix Makefile for phoneserver
+
+v1.0.48
+----------
+ * another test travis rev, ignore
+
+v1.0.47
+----------
+ * test tag for travis deploy
+
+v1.0.46
+----------
+ * update metadata for v8.10.19
+ * remove aws-lambda-go as dependency (thanks @shaxbee)
+
+v1.0.45
+----------
+ * Update metadata to fix Mexican formatting (thanks @bvisness)
+ * Add tests specifically for Mexico (thanks @bvisness)
+
+v1.0.44
+----------
+ * update metadata for v8.10.16
+ * upgrade to the latest release of protobuf
+
+v1.0.43
+----------
+ * Update metadata for v8.10.14
+
 v1.0.42
 ----------
  * Update for metadata changes in v8.10.13
