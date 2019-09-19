@@ -1,4 +1,4 @@
-module github.com/nyaruka/phonenumbers
+module github.com/mervynrwtw/phonenumbers
 
 require github.com/golang/protobuf v1.2.0
 
